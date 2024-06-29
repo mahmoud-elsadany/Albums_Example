@@ -7,8 +7,8 @@ import android.content.pm.PackageManager
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.cme_mahmoud.albums.R
 import com.google.android.material.snackbar.Snackbar
-import com.swensonhe.weather.R
 import java.util.*
 
 object Utils {

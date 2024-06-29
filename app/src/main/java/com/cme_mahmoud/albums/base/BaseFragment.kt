@@ -99,17 +99,6 @@ abstract class BaseFragment : Fragment(), CoroutineScope{
             .observe(requireActivity(), activeNetworkStateObserver)
     }
 
-    fun showHide(et: EditText, img: ImageView) {
-        if (et.inputType.equals(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)) {
-            et.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
-            img.setImageResource(R.drawable.ic_show_pass)
-            et.setSelection(et.length())
-        } else {
-            img.setImageResource(R.drawable.ic_show_pass)
-            et.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            et.setSelection(et.length())
-        }
-    }
 
     private val activeNetworkStateObserver =
         Observer { isConnected: Boolean ->

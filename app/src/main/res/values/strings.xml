@@ -2,4 +2,5 @@
     <string name="app_name">Albums Task</string>
     <string name="error_mssg">please try again later</string>
     <string name="error_title">error occurred</string>
+    <string name="please_wait">Please Wait ...</string>
 </resources>

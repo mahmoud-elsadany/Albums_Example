@@ -22,20 +22,12 @@ abstract class PresentationModule {
         factory: ViewModelFactory
     ): ViewModelProvider.Factory
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(UserViewModel::class)
-    abstract fun bindsLoginViewModel(homeVM: UserViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(HomePageViewModel::class)
-    abstract fun bindsLandingPageViewModel(landingPageVM: HomePageViewModel): ViewModel
+    abstract fun bindsHomePageViewModel(homePageVM: HomePageViewModel): ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(TrialsViewModel::class)
-    abstract fun bindsTrialsViewModel(trialsVM: TrialsViewModel): ViewModel
 
     @Binds
     @IntoMap
