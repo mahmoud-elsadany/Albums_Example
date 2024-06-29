@@ -1,0 +1,19 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+}
+
+rootProject.name = "CMEAlbums"
+include ':app'
+include ':domain'
+include ':presentation'
+include ':data'
+include ':local'
+include ':remote'
+include ':common'

@@ -1,0 +1,196 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildTools
+
+    defaultConfig {
+        applicationId "com.cme_mahmoud.albums"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.appVersionCode
+        versionName rootProject.ext.appVersionName
+
+        testInstrumentationRunner "com.cme_mahmoud.albums.HiltTestRunner"
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        development {
+            dimension "default"
+            versionNameSuffix ".dev"
+            buildConfigField "String", "BASE_URL", base_url
+
+            manifestPlaceholders = [
+                    appIcon     : "@mipmap/logo",
+                    appIconRound: "@mipmap/logo"
+            ]
+
+
+            buildConfigField "String", "ENV", "\"development\""
+
+
+        }
+
+        qc_testing {
+            dimension "default"
+            versionNameSuffix ".testing"
+            buildConfigField "String", "BASE_URL", base_url
+
+            manifestPlaceholders = [
+                    appIcon     : "@mipmap/logo",
+                    appIconRound: "@mipmap/logo"
+            ]
+
+            buildConfigField "String", "ENV", "\"testing\""
+
+        }
+        staging {
+            dimension "default"
+            buildConfigField "String", "BASE_URL", base_url
+
+            manifestPlaceholders = [
+                    appIcon     : "@mipmap/logo",
+                    appIconRound: "@mipmap/logo"
+            ]
+
+
+            buildConfigField "String", "ENV", "\"staging\""
+
+        }
+    }
+
+    buildTypes {
+
+        getByName("release") {
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        }
+
+        getByName("debug") {
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    namespace 'com.cme_mahmoud.albums'
+}
+
+dependencies {
+    implementation project(':domain')
+    implementation project(':data')
+    implementation project(':remote')
+    implementation project(':local')
+    implementation project(':presentation')
+    implementation project(':common')
+
+    //dagger hilt dependencies
+    implementation "com.google.dagger:hilt-android:$daggerHiltVersion"
+    implementation 'androidx.core:core-ktx:1.7.0'
+
+    kapt "com.google.dagger:hilt-compiler:$daggerHiltVersion"
+
+    // For instrumentation tests
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$daggerHiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$daggerHiltVersion"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
+
+    // For local unit tests
+    testImplementation "com.google.dagger:hilt-android-testing:$daggerHiltVersion"
+    testAnnotationProcessor "com.google.dagger:hilt-compiler:$daggerHiltVersion"
+
+
+    // Dagger dependency injection
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+//    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+
+
+    // Life cycle VM and LiveData
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+
+    // Saved state module for ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
+
+    // Annotation processor
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion")
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
+    implementation "androidx.fragment:fragment-ktx:$ktx"
+    //implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+
+    // UI
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.cardview:cardview:$cardViewVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerviewVersion"
+
+    // test
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+    androidTestImplementation "androidx.test:rules:$testRulesVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+
+
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navVersion"
+
+    implementation "com.google.android.material:material:$materialversion"
+    implementation "com.google.android.gms:play-services-location:20.0.0"
+    // Coroutines(includes kotlin flow)
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    implementation("com.squareup.okhttp3:logging-interceptor:3.9.0")
+
+
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+
+    implementation 'com.airbnb.android:lottie:3.4.1'
+
+
+
+}
