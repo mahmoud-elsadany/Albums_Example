@@ -9,6 +9,6 @@ data class AlbumObject(
     val image: String,
     val genre: String,
     val releaseDate: String,
-    val copyright: String?,
+    val copyright: String,
     val iTunesLink: String
 )

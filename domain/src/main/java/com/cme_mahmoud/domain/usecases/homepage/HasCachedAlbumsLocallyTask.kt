@@ -15,11 +15,11 @@ class HasCachedAlbumsLocallyTask  @Inject constructor(
 defaultDispatcher
 ) {
 
+
     override suspend fun generateFlowable(
         input: String?,
-        networkStatus: Boolean
+        networStatus: Boolean
     ): Flow<Outcome<Boolean>> {
-
         return homePageRepository.hasCachedAlbums()
     }
 

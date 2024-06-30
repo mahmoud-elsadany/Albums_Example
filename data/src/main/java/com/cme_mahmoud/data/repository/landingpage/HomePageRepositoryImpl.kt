@@ -51,29 +51,15 @@ class HomePageRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun saveNewLocalAlbums(newRemoteAlbums: List<AlbumObject>) {
+    override suspend fun saveNewLocalAlbums( newRemoteAlbums: List<AlbumObject>) {
 
-        val convertedToLocalAlbums: ArrayList<AlbumObject> = ArrayList()
-
-        newRemoteAlbums.forEach() {
-            val albumObject = AlbumObject(
-                name = it.name,
-                artist = it.artist,
-                image = it.image,
-                genre = it.genre,
-                releaseDate = it.releaseDate,
-                copyright = it.copyright,
-                iTunesLink = it.iTunesLink
-            )
-            convertedToLocalAlbums.add(albumObject)
-        }
 
         return localDataSource.saveMultipleAlbumsToRealm(
-            convertedToLocalAlbums.toList()
+            newRemoteAlbums
         )
     }
 
-    override suspend fun updateLocalAlbums(newRemoteAlbums: List<AlbumObject>) {
+    override suspend fun updateLocalAlbums( newRemoteAlbums: List<AlbumObject>) {
         val convertedToLocalAlbums: ArrayList<AlbumObject> = ArrayList()
 
         newRemoteAlbums.forEach() {

@@ -56,7 +56,7 @@ class HomePageFragment : BaseFragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homePageVM.exceptionState.collect {
-                    print(it)
+                    println("exceptionState: "+it)
                     showException(
                         context?.getString(R.string.error_title),
                         context?.getString(R.string.error_mssg),

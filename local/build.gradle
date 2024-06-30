@@ -3,7 +3,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'realm-android' // add this line
+    id 'realm-android'
 }
 
 android {
@@ -14,6 +14,10 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+    }
+
+    compileOptions {
+        incremental false
     }
 
     buildTypes {
@@ -43,6 +47,6 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
 
-    implementation "io.realm:realm-android-library:$realm_version"
+    implementation 'io.realm:realm-android-library:10.10.1'  // Check for the latest version
 
 }

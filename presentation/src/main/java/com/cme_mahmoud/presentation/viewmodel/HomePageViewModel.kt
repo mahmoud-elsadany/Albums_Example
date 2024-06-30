@@ -33,7 +33,7 @@ class HomePageViewModel @Inject constructor(
             hasCachedAlbumsLocallyTask.buildUseCase("")
                 .catch {
                     exceptionState.emit(it.message ?: "")
-                }.flowOn(Dispatchers.IO)
+                }.flowOn(Dispatchers.Default)
                 .collect {
                     when (it) {
                         is Outcome.Progress -> {
@@ -85,13 +85,15 @@ class HomePageViewModel @Inject constructor(
                             val albumList: ArrayList<AlbumObject> = ArrayList()
 
                             it.data.feed.results.forEach() { albumListObj ->
+
+                                val genreObj = albumListObj.genres.filter { it.genreId != "34" }
+
                                 albumList.add(
                                     AlbumObject(
                                         name = albumListObj.name,
                                         artist = albumListObj.artistName,
                                         image = albumListObj.artworkUrl100,
-                                        genre = albumListObj.genres.filter { it.genreId != "34" }
-                                            .joinToString(),
+                                        genre = genreObj[0].name,
                                         releaseDate = albumListObj.releaseDate,
                                         copyright = it.data.feed.copyright,
                                         iTunesLink = albumListObj.url

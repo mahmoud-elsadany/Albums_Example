@@ -12,7 +12,7 @@ interface HomePageRepository {
     suspend fun getAllRemoteAlbums(): Flow<Outcome<AlbumsResponse>>
 
 
-    suspend fun saveNewLocalAlbums(newRemoteAlbums: List<AlbumObject>)
+    suspend fun saveNewLocalAlbums( newRemoteAlbums: List<AlbumObject>)
 
     suspend fun updateLocalAlbums(newRemoteAlbums: List<AlbumObject>)
 

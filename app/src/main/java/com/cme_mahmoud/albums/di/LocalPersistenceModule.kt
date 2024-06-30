@@ -11,9 +11,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.realm.Realm
 import javax.inject.Singleton
 
-@Module(includes = [LocalPersistenceModule.Binders::class])
+@Module
 @InstallIn(SingletonComponent::class)
 class LocalPersistenceModule {
 
@@ -27,6 +28,7 @@ class LocalPersistenceModule {
         ): DatabaseDataSource
 
     }
+
 
 
 

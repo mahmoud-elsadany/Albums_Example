@@ -49,7 +49,7 @@ ext {
 
     // Architecture components
     roomVersion = "2.4.0"
-    realm_version = "10.4.0"
+    realm_version = "10.07.0"
     archCoreVersion = "2.1.0"
     lifecycleVersion = '2.4.0'
     camerax_version = "1.0.0-beta07"

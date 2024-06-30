@@ -8,7 +8,8 @@ interface DatabaseDataSource {
 
     fun getAllAlbumsFromRealm(): List<AlbumObject>
     fun deleteAllSavedAlbumsFromRealm()
-    fun hasCachedAlbums():Boolean
+    fun hasCachedAlbums(): Boolean
+
     fun saveMultipleAlbumsToRealm(albums: List<AlbumObject>)
     fun updateAllAlbumsInRealm(updatedAlbums: List<AlbumObject>)
 

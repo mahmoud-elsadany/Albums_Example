@@ -6,6 +6,8 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
     id 'org.jetbrains.kotlin.android'
+    id 'realm-android'
+
 }
 
 android {
@@ -32,8 +34,8 @@ android {
             buildConfigField "String", "BASE_URL", base_url
 
             manifestPlaceholders = [
-                    appIcon     : "@mipmap/logo",
-                    appIconRound: "@mipmap/logo"
+                    appIcon     : "@drawable/logo",
+                    appIconRound: "@drawable/logo"
             ]
 
 
@@ -48,8 +50,8 @@ android {
             buildConfigField "String", "BASE_URL", base_url
 
             manifestPlaceholders = [
-                    appIcon     : "@mipmap/logo",
-                    appIconRound: "@mipmap/logo"
+                    appIcon     : "@drawable/logo",
+                    appIconRound: "@drawable/logo"
             ]
 
             buildConfigField "String", "ENV", "\"testing\""
@@ -60,8 +62,8 @@ android {
             buildConfigField "String", "BASE_URL", base_url
 
             manifestPlaceholders = [
-                    appIcon     : "@mipmap/logo",
-                    appIconRound: "@mipmap/logo"
+                    appIcon     : "@drawable/logo",
+                    appIconRound: "@drawable/logo"
             ]
 
 
@@ -190,6 +192,10 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
     implementation 'com.airbnb.android:lottie:3.4.1'
+
+    implementation 'io.realm:realm-android-library:10.10.1'  // Check for the latest version
+
+
 
 
 

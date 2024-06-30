@@ -36,4 +36,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+
 }
