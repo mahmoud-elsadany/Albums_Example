@@ -3,18 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/LandingPageFragment">
+    app:startDestination="@id/HomePageFragment">
 
     <fragment
-        android:id="@+id/LandingPageFragment"
+        android:id="@+id/HomePageFragment"
         android:name="com.cme_mahmoud.albums.ui.homepage.HomePageFragment"
-        android:label="fragment_landing"
-        tools:layout="@layout/fragment_landing_page">
+        android:label="fragment_home">
+
+        <action
+            android:id="@+id/action_homePageFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
 
 
+    <fragment
+        android:id="@+id/albumDetailsFragment"
+        android:name="com.cme_mahmoud.albums.ui.albumDetails.AlbumDetailsFragment" >
+    </fragment>
 
 
 </navigation>

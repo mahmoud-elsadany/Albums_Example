@@ -8,10 +8,14 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.cme_mahmoud.albums.R
+import com.cme_mahmoud.common.model.AlbumObject
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 object Utils {
+
+    var ChosenAlbum: AlbumObject? = null
+
     fun showLoginErrorToast(context: Context, error: String?) {
         var msg = error
         if (msg.isNullOrEmpty())

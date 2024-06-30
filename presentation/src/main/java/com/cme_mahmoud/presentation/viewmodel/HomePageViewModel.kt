@@ -116,6 +116,8 @@ class HomePageViewModel @Inject constructor(
 
     fun saveNewAlbums(newRemoteAlbums: List<AlbumObject>) {
         viewModelScope.launch {
+
+
             saveAllAlbumsLocallyTask.buildUseCase(newRemoteAlbums)
 
             _albums.value.clear()

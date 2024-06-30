@@ -12,8 +12,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.cme_mahmoud.albums.R
 import com.cme_mahmoud.albums.base.BaseFragment
+import com.cme_mahmoud.albums.util.general.Utils.ChosenAlbum
 import com.cme_mahmoud.presentation.factory.ViewModelFactory
 import com.cme_mahmoud.presentation.viewmodel.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,82 +45,91 @@ class HomePageFragment : BaseFragment() {
 
 
                 val albums by homePageVM.albums.collectAsState()
-                println("albums need to shown: $albums")
-                HomePageScreen(albums = albums)
-            }
-        }
 
+                HomePageScreen(albums = albums, onAlbumClick = { album ->
+                    ChosenAlbum = album
+                    val action =
+                        HomePageFragmentDirections.actionHomePageFragmentToAlbumDetailsFragment()
+                    findNavController().navigate(action)
+                }, onRefresh = {
+                    homePageVM.getAllRemoteAlbums()
+                })
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initUI()
-        initMainObservations()
-    }
-
-    override fun networkStatusChanged(isConnected: Boolean) {
-        super.networkStatusChanged(isConnected)
-        networkStatus = isConnected
-    }
-
-    private fun initMainObservations() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homePageVM.exceptionState.collect {
-                    println("exceptionState: " + it)
-                    showException(
-                        context?.getString(R.string.error_title),
-                        context?.getString(R.string.error_mssg),
-                        false
-                    )
-                }
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homePageVM.loadingState.collect {
-                    showLoading(it)
-                }
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homePageVM.apiErrorState.collect {
-
-                    print(it.errorMessage)
-                    showException(
-                        context?.getString(R.string.error_title),
-                        context?.getString(R.string.error_mssg),
-                        false
-                    )
-
-                }
             }
         }
     }
 
 
-    private fun initUI() {
-        homePageVM =
-            ViewModelProvider(this, homePageModelFactory)[HomePageViewModel::class.java]
+}
 
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initUI()
+    initMainObservations()
+}
 
-        homePageVM.hasCachedAlbums()
+override fun networkStatusChanged(isConnected: Boolean) {
+    super.networkStatusChanged(isConnected)
+    networkStatus = isConnected
+}
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homePageVM.albums.collect {
-                    println("albums need to shown owner: $it")
-                }
+private fun initMainObservations() {
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            homePageVM.exceptionState.collect {
+                println("exceptionState: " + it)
+                showException(
+                    context?.getString(R.string.error_title),
+                    context?.getString(R.string.error_mssg),
+                    false
+                )
+            }
+        }
+    }
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            homePageVM.loadingState.collect {
+                showLoading(it)
             }
         }
     }
 
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            homePageVM.apiErrorState.collect {
 
-    override fun onBackPressed(): Boolean {
-        return false
+                print(it.errorMessage)
+                showException(
+                    context?.getString(R.string.error_title),
+                    context?.getString(R.string.error_mssg),
+                    false
+                )
+
+            }
+        }
     }
+}
+
+
+private fun initUI() {
+    homePageVM =
+        ViewModelProvider(this, homePageModelFactory)[HomePageViewModel::class.java]
+
+
+    homePageVM.hasCachedAlbums()
+
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            homePageVM.albums.collect {
+                println("albums need to shown owner: $it")
+            }
+        }
+    }
+}
+
+
+override fun onBackPressed(): Boolean {
+    return false
+}
 
 }
