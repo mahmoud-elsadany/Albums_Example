@@ -61,6 +61,7 @@ fun AlbumGrid(albums: List<AlbumObject>, onAlbumClick: (AlbumObject) -> Unit) {
     }
 }
 
+
 @Composable
 fun AlbumItem(album: AlbumObject, onAlbumClick: (AlbumObject) -> Unit) {
     Column(
