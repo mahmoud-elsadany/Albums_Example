@@ -1,5 +1,7 @@
 package com.cme_mahmoud.presentation.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cme_mahmoud.common.ErrorModel
 import com.cme_mahmoud.common.Outcome
@@ -11,8 +13,7 @@ import com.cme_mahmoud.domain.usecases.homepage.SaveAllAlbumsLocallyTask
 import com.cme_mahmoud.presentation.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
@@ -26,12 +27,16 @@ class HomePageViewModel @Inject constructor(
 
     ) : BaseViewModel() {
 
+    private val _albums = MutableSharedFlow<List<AlbumObject>>(replay = 1)
+    val albums: SharedFlow<List<AlbumObject>> = _albums
 
 
-    private val _albums = MutableStateFlow<ArrayList<AlbumObject>>(ArrayList())
-    val albums: StateFlow<ArrayList<AlbumObject>> = _albums
-
-
+    init {
+        // Initialize with empty list
+        viewModelScope.launch {
+            _albums.emit(emptyList())
+        }
+    }
     fun hasCachedAlbums() {
         viewModelScope.launch {
             hasCachedAlbumsLocallyTask.buildUseCase("")
@@ -120,8 +125,8 @@ class HomePageViewModel @Inject constructor(
 
             saveAllAlbumsLocallyTask.buildUseCase(newRemoteAlbums)
 
-            _albums.value.clear()
-            _albums.value.addAll(newRemoteAlbums)
+
+            _albums.emit(newRemoteAlbums)
 
         }
     }
@@ -148,8 +153,7 @@ class HomePageViewModel @Inject constructor(
 
                         is Outcome.Success -> {
                             println("cached albums: ${it.data}")
-                            _albums.value.clear()
-                            _albums.value.addAll(it.data)
+                            _albums.emit(it.data)
                         }
                     }
                 }

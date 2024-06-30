@@ -52,7 +52,7 @@ class HomePageRepositoryImpl @Inject constructor(
 
 
     override suspend fun saveNewLocalAlbums( newRemoteAlbums: List<AlbumObject>) {
-
+        localDataSource.deleteAllSavedAlbumsFromRealm()
 
         return localDataSource.saveMultipleAlbumsToRealm(
             newRemoteAlbums

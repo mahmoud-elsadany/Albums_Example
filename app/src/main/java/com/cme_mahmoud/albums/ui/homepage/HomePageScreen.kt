@@ -24,14 +24,19 @@ import coil.compose.rememberImagePainter
 import com.cme_mahmoud.common.model.AlbumObject
 
 @Composable
-fun HomePageScreen(albums: List<AlbumObject>,  onAlbumClick: (AlbumObject) -> Unit, onRefresh: () -> Unit) {
+fun HomePageScreen(
+    albums: List<AlbumObject>,
+    onAlbumClick: (AlbumObject) -> Unit,
+    onRefresh: () -> Unit
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         Button(onClick = onRefresh, modifier = Modifier.padding(16.dp)) {
             Text(text = "Refresh")
         }
+
         if (albums.isEmpty()) {
             Text(
-                text = "There are no albums try to refresh",
+                text = "There are no albums",
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
@@ -39,7 +44,7 @@ fun HomePageScreen(albums: List<AlbumObject>,  onAlbumClick: (AlbumObject) -> Un
         } else {
             AlbumGrid(albums, onAlbumClick)
         }
-        AlbumGrid(albums, onAlbumClick)
+
     }
 }
 
@@ -63,7 +68,7 @@ fun AlbumItem(album: AlbumObject, onAlbumClick: (AlbumObject) -> Unit) {
             .padding(8.dp)
             .fillMaxWidth()
             .clickable { onAlbumClick(album) }
-    ){
+    ) {
         val painter = rememberImagePainter(data = album.image)
 
         Image(
