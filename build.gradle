@@ -3,6 +3,7 @@ apply from: 'versions.gradle'
 
 buildscript {
     ext.kotlin_version = '1.6.10'
+    ext.compose_version = '1.4.0'
     ext.daggerHiltVersion='2.43.2'
     ext.navVersion='2.4.2'
 

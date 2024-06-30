@@ -11,6 +11,8 @@ import com.cme_mahmoud.domain.usecases.homepage.SaveAllAlbumsLocallyTask
 import com.cme_mahmoud.presentation.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
@@ -25,7 +27,9 @@ class HomePageViewModel @Inject constructor(
     ) : BaseViewModel() {
 
 
-    val cachedAlbums = MutableSharedFlow<List<AlbumObject>>()
+
+    private val _albums = MutableStateFlow<ArrayList<AlbumObject>>(ArrayList())
+    val albums: StateFlow<ArrayList<AlbumObject>> = _albums
 
 
     fun hasCachedAlbums() {
@@ -114,7 +118,9 @@ class HomePageViewModel @Inject constructor(
         viewModelScope.launch {
             saveAllAlbumsLocallyTask.buildUseCase(newRemoteAlbums)
 
-            cachedAlbums.emit(newRemoteAlbums)
+            _albums.value.clear()
+            _albums.value.addAll(newRemoteAlbums)
+
         }
     }
 
@@ -139,9 +145,9 @@ class HomePageViewModel @Inject constructor(
                         }
 
                         is Outcome.Success -> {
-
-                            cachedAlbums.emit(it.data)
-
+                            println("cached albums: ${it.data}")
+                            _albums.value.clear()
+                            _albums.value.addAll(it.data)
                         }
                     }
                 }

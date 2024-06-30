@@ -85,6 +85,17 @@ android {
             debuggable true
         }
     }
+
+    buildFeatures {
+        compose true
+        dataBinding true
+    }
+
+
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -92,9 +103,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-    }
+
     namespace 'com.cme_mahmoud.albums'
 }
 
@@ -109,6 +118,7 @@ dependencies {
     //dagger hilt dependencies
     implementation "com.google.dagger:hilt-android:$daggerHiltVersion"
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.compose.foundation:foundation-android:1.6.8'
 
     kapt "com.google.dagger:hilt-compiler:$daggerHiltVersion"
 
@@ -193,9 +203,16 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:3.4.1'
 
-    implementation 'io.realm:realm-android-library:10.10.1'  // Check for the latest version
+    implementation 'io.realm:realm-android-library:10.10.1'
 
 
+
+
+
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation "io.coil-kt:coil-compose:1.4.0"
 
 
 

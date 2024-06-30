@@ -11,7 +11,6 @@ import androidx.navigation.fragment.NavHostFragment
 import com.cme_mahmoud.albums.R
 import com.cme_mahmoud.albums.base.BaseActivity
 import com.cme_mahmoud.albums.base.BaseFragment
-import com.cme_mahmoud.albums.databinding.ActivityHostBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,14 +18,12 @@ class HostActivity : BaseActivity() {
     private var handler: Handler? = null
     private var r: Runnable? = null
     private lateinit var navController: NavController
-    private lateinit var binding: ActivityHostBinding
     var shutterWasClicked = MutableLiveData<Boolean>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHostBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_host)
         //disble dark mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
