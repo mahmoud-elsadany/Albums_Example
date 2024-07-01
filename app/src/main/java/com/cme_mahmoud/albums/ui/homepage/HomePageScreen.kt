@@ -61,6 +61,7 @@ fun AlbumGrid(albums: List<AlbumObject>, onAlbumClick: (AlbumObject) -> Unit) {
     }
 }
 
+
 @Composable
 fun AlbumItem(album: AlbumObject, onAlbumClick: (AlbumObject) -> Unit) {
     Column(
@@ -77,7 +78,7 @@ fun AlbumItem(album: AlbumObject, onAlbumClick: (AlbumObject) -> Unit) {
             modifier = Modifier
                 .height(120.dp)
                 .fillMaxWidth(),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Fit
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = "Album name: ${album.name}")
