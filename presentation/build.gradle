@@ -5,7 +5,8 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
+    buildToolsVersion = rootProject.ext.buildTools
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -21,7 +22,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'com.syngenta.presentation'
+    namespace 'com.mahmoud.presentation'
 
 }
 
@@ -57,14 +58,9 @@ dependencies {
     // ReactiveStreams support for LiveData
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion"
 
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "androidx.arch.core:core-testing:$archCoreVersion"
-    testImplementation "org.mockito:mockito-core:$mockitoVersion"
-    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
     implementation 'com.google.code.gson:gson:2.8.9'
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
 
 
 }

@@ -12,17 +12,17 @@ plugins {
 
 android {
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildTools
+    compileSdk rootProject.ext.compileSdkVersion
+    buildToolsVersion = rootProject.ext.buildTools
 
     defaultConfig {
-        applicationId "com.cme_mahmoud.albums"
+        applicationId "com.mahmoud.albums"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.appVersionCode
         versionName rootProject.ext.appVersionName
 
-        testInstrumentationRunner "com.cme_mahmoud.albums.HiltTestRunner"
+        testInstrumentationRunner "com.mahmoud.albums.HiltTestRunner"
     }
 
     flavorDimensions "default"
@@ -104,7 +104,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    namespace 'com.cme_mahmoud.albums'
+    namespace 'com.mahmoud.albums'
 }
 
 dependencies {

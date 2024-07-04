@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/HomePageFragment"
-        android:name="com.cme_mahmoud.albums.ui.homepage.HomePageFragment"
+        android:name="com.mahmoud.albums.ui.homepage.HomePageFragment"
         android:label="fragment_home">
 
         <action
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/albumDetailsFragment"
-        android:name="com.cme_mahmoud.albums.ui.albumDetails.AlbumDetailsFragment" >
+        android:name="com.mahmoud.albums.ui.albumDetails.AlbumDetailsFragment" >
     </fragment>
 
 
