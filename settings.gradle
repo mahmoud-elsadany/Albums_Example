@@ -9,7 +9,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CMEAlbums"
+rootProject.name = "Albums"
 include ':app'
 include ':domain'
 include ':presentation'
