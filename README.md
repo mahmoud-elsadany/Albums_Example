@@ -17,7 +17,7 @@ Welcome to the **Albums_Example** repository! This Android project demonstrates 
 
 ## Introduction
 
-The **Albums_Example** project showcases a detailed implementation of an album management system. It allows users to add, view, and manage albums with a focus on a clean and maintainable codebase using clean architecture principles.
+The **Albums_Example** project showcases a detailed implementation which allows users to view, and manage albums with a focus on a clean and maintainable codebase using clean architecture principles.
 
 ## Features
 
